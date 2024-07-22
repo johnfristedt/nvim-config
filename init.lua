@@ -2,6 +2,7 @@ vim.cmd("colorscheme codedark")
 vim.cmd("language en_US")
 vim.wo.number = true
 vim.wo.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = ","
 vim.g.localleader = "\\"
 
@@ -138,7 +139,7 @@ cmp.setup({
   formatting = {
       fields = {'menu', 'abbr', 'kind'},
       format = function(entry, item)
-          local menu_icon ={
+          local menu_icon = {
               nvim_lsp = 'λ',
               vsnip = '⋗',
               buffer = 'Ω',
@@ -149,3 +150,4 @@ cmp.setup({
       end,
   },
 })
+
