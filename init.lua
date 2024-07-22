@@ -1,5 +1,5 @@
 vim.cmd("colorscheme codedark")
-vim.cmd("language en_US")
+-- vim.cmd("language en_US")
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
@@ -8,7 +8,7 @@ vim.g.localleader = "\\"
 
 -- IMPORTS
 require('vars')      -- Variables
--- require('opts')      -- Options
+require('opts')      -- Options
 -- require('keys')      -- Keymaps
 require('plug')      -- Plugins
 
@@ -40,13 +40,13 @@ vim.api.nvim_set_keymap("n", "<leader>9", "9<C-w>w", { noremap = true, silent = 
 
 -- Mason Setup
 require("mason").setup({
-    ui = {
-        icons = {
-            package_installed = "",
-            package_pending = "",
-            package_uninstalled = "",
-        },
-    }
+  ui = {
+    icons = {
+      package_installed = "",
+      package_pending = "",
+      package_uninstalled = "",
+    },
+  }
 })
 require("mason-lspconfig").setup()
 
@@ -79,17 +79,17 @@ sign({name = 'DiagnosticSignHint', text = ''})
 sign({name = 'DiagnosticSignInfo', text = ''})
 
 vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    update_in_insert = true,
-    underline = true,
-    severity_sort = false,
-    float = {
-        border = 'rounded',
-        source = 'always',
-        header = '',
-        prefix = '',
-    },
+  virtual_text = false,
+  signs = true,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = false,
+  float = {
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
 })
 
 vim.cmd([[
@@ -104,7 +104,7 @@ cmp.setup({
   -- Enable LSP snippets
   snippet = {
     expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   mapping = {
@@ -133,21 +133,38 @@ cmp.setup({
     { name = 'calc'},                               -- source for math calculation
   },
   window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   formatting = {
-      fields = {'menu', 'abbr', 'kind'},
-      format = function(entry, item)
-          local menu_icon = {
-              nvim_lsp = 'λ',
-              vsnip = '⋗',
-              buffer = 'Ω',
-              path = '🖫',
-          }
-          item.menu = menu_icon[entry.source.name]
-          return item
-      end,
+    fields = {'menu', 'abbr', 'kind'},
+    format = function(entry, item)
+      local menu_icon = {
+        nvim_lsp = 'λ',
+        vsnip = '⋗',
+        buffer = 'Ω',
+        path = '🖫',
+      }
+      item.menu = menu_icon[entry.source.name]
+      return item
+    end,
   },
 })
+
+
+-- Treesitter Plugin Setup 
+require('nvim-treesitter.configs').setup {
+  ensure_installed = { "lua", "rust", "toml" },
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting=false,
+  },
+  ident = { enable = true }, 
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  }
+}
 
