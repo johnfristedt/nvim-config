@@ -166,22 +166,4 @@ let g:vimspector_terminal_maxwidth = 70
 --     callback = open_chadtree_on_startup
 -- })
 
-
--- Function to set custom highlights for Rust files
-local function set_rust_highlights()
-    vim.cmd [[
-      augroup CustomRustHighlights
-        autocmd!
-        autocmd FileType rust highlight CHADTreeFileName guifg=NONE guibg=NONE
-        autocmd FileType rust highlight CHADTreeFolderName guifg=NONE guibg=NONE
-        autocmd FileType rust highlight CHADTreeRootFolder guifg=NONE guibg=NONE
-        autocmd FileType rust highlight CHADTreeOpenedFolderName guifg=NONE guibg=NONE
-        autocmd FileType rust highlight CHADTreeClosedFolderName guifg=NONE guibg=NONE
-        autocmd FileType rust highlight CHADTreeExecFile guifg=NONE guibg=NONE
-        autocmd FileType rust highlight CHADTreeUpDir guifg=NONE guibg=NONE
-      augroup END
-    ]]
-end
-
--- Call the function to set the highlights
-set_rust_highlights()
+-- Remove background for chadtree highlights
