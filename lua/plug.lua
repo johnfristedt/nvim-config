@@ -36,4 +36,7 @@ return require('packer').startup(function()
     run = 'python3 -m chadtree deps'
   }
 
+  -- Copilot
+  use 'github/copilot.vim'
+
 end)
