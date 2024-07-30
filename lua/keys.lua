@@ -17,22 +17,6 @@ vim.api.nvim_set_keymap("n", "<leader>9", "9<C-w>w", { noremap = true, silent = 
 
 vim.api.nvim_set_keymap("n", "<leader>c", ":CHADopen<CR>", { noremap = true, silent = true })
 
--- Vimspector key mappings
-vim.cmd([[
-  nmap <F5> <cmd>call vimspector#Launch()<cr>
-  nmap <F6> <cmd>call vimspector#Continue()<cr>
-  nmap <F8> <cmd>call vimspector#Reset()<cr>
-  nmap <F9> <cmd>call vimspector#StepOut()<cr>
-  nmap <F10> <cmd>call vimspector#StepOver()<cr>
-  nmap <F11> <cmd>call vimspector#StepInto()<cr>
-]])
-
--- Define key mappings with vim.api.nvim_set_keymap
-vim.api.nvim_set_keymap('n', 'Db', ':call vimspector#ToggleBreakpoint()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'Dw', ':call vimspector#AddWatch()<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'De', ':call vimspector#Evaluate()<cr>', { noremap = true, silent = true })
-
-
 -- Function to move the current buffer to a new vertical split
 function move_to_right_split()
   -- Save the current buffer number
@@ -50,3 +34,11 @@ end
 
 -- Map the function to a key combination (e.g., <leader>mv)
 vim.api.nvim_set_keymap('n', '<leader>mv', ':lua move_to_right_split()<CR>', { noremap = true, silent = true })
+
+-- DAP keybindings
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<S-F5>', function() require('dap').terminate() end)
+vim.keymap.set('n', '<F9>', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)

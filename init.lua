@@ -1,5 +1,5 @@
 vim.cmd("colorscheme codedark")
--- vim.cmd("language en_US")
+vim.cmd("language en_US")
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
@@ -7,11 +7,11 @@ vim.g.mapleader = ","
 vim.g.localleader = "\\"
 
 -- IMPORTS
-require('vars')      -- Variables
-require('opts')      -- Options
+require('debugger')     -- Debugging
 require('keys')      -- Keymaps
+require('opts')      -- Options
 require('plug')      -- Plugins
-
+require('vars')      -- Variables
 
 -- Mason Setup
 require("mason").setup({
@@ -143,27 +143,22 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
+-- CHADtree
+local function open_chadtree_on_startup()
+    local bufname = vim.fn.expand('%')
+    if vim.fn.isdirectory(bufname) == 1 then
+        vim.cmd('CHADopen')
+    end
+end
 
--- Vimspector options
+vim.api.nvim_create_autocmd('VimEnter', {
+    pattern = '*',
+    callback = open_chadtree_on_startup
+})
+
 vim.cmd([[
-let g:vimspector_sidebar_width = 85
-let g:vimspector_bottombar_height = 15
-let g:vimspector_terminal_maxwidth = 70
+autocmd FileType NvimTree setlocal nu rnu
 ]])
 
-
-
--- CHADtree
--- local function open_chadtree_on_startup()
---     local bufname = vim.fn.expand('%')
---     if vim.fn.isdirectory(bufname) == 1 then
---         vim.cmd('CHADopen')
---     end
--- end
--- 
--- vim.api.nvim_create_autocmd('VimEnter', {
---     pattern = '*',
---     callback = open_chadtree_on_startup
--- })
-
 -- Remove background for chadtree highlights
+
