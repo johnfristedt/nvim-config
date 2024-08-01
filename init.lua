@@ -144,21 +144,20 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- CHADtree
-local function open_chadtree_on_startup()
-    local bufname = vim.fn.expand('%')
-    if vim.fn.isdirectory(bufname) == 1 then
-        vim.cmd('CHADopen')
-    end
-end
+-- local function open_chadtree_on_startup()
+--     local bufname = vim.fn.expand('%')
+--     if vim.fn.isdirectory(bufname) == 1 then
+--         vim.cmd('CHADopen --nofocus')
+--     end
+-- end
+-- 
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--     pattern = '*',
+--     callback = open_chadtree_on_startup
+-- })
 
-vim.api.nvim_create_autocmd('VimEnter', {
-    pattern = '*',
-    callback = open_chadtree_on_startup
-})
+-- Telescope
+require("telescope").setup()
 
-vim.cmd([[
-autocmd FileType NvimTree setlocal nu rnu
-]])
-
--- Remove background for chadtree highlights
-
+-- Copilot
+-- vim.cmd('Copilot disable')
