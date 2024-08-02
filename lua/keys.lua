@@ -18,27 +18,18 @@ vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>w", { noremap = true, silent = t
 
 vim.api.nvim_set_keymap("n", "<leader>c", ":CHADopen --nofocus<CR>", { noremap = true, silent = true })
 
--- Function to move the current buffer to a new vertical split
-function move_to_right_split()
-  -- Save the current buffer number
-  local current_buf = vim.api.nvim_get_current_buf()
-  
-  -- Create a new vertical split
-  vim.cmd('vsplit')
-  
-  -- Move to the new split (right split)
-  vim.cmd('wincmd l')
-  
-  -- Open the current buffer in the new split
-  vim.api.nvim_set_current_buf(current_buf)
-end
-
--- Map the function to a key combination (e.g., <leader>mv)
-vim.api.nvim_set_keymap('n', '<leader>mv', ':lua move_to_right_split()<CR>', { noremap = true, silent = true })
-
 -- DAP keybindings
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-vim.keymap.set('n', '<S-F5>', function() require('dap').terminate() end)
+vim.keymap.set('n', '<F5>', function() 
+  vim.cmd('tabnew %')
+  require('dap').continue()
+end)
+vim.keymap.set('n', '<S-F5>', function() 
+  vim.cmd('tabclose')
+  require('dap').terminate() 
+end)
+vim.keymap.set('n', '<S-b>', function()
+  vim.cmd('Cbuild') 
+end)
 vim.keymap.set('n', '<F9>', function() require('dap').toggle_breakpoint() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
@@ -47,9 +38,6 @@ vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
 -- Telescope keybindings
 vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files() end)
 -- vim.keymap.set('n', '<C-[>', function() require('telescope.builtin').lsp_references() end)
-
--- Hover
-vim.api.nvim_set_keymap('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<cr>', { noremap = true, silent = true })
 
 -- Zen Mode
 function toggle_zen_mode()
@@ -61,3 +49,9 @@ function toggle_zen_mode()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>z', ':lua toggle_zen_mode()<CR>', { noremap = true, silent = true })
+
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
