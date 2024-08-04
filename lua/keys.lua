@@ -1,9 +1,9 @@
-vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnew", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>to", ":tabonly<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>tm", ":tabmove<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>tp", ":tabprevious<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnext<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnew<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>to", ":tabonly<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>tm", ":tabmove<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>tp", ":tabprevious<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnext<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>1", "1<C-w>w", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>2", "2<C-w>w", { noremap = true, silent = true })
@@ -21,6 +21,7 @@ vim.api.nvim_set_keymap("n", "<leader>c", ":CHADopen --nofocus<CR>", { noremap =
 -- DAP keybindings
 vim.keymap.set('n', '<F5>', function() 
   vim.cmd('tabnew %')
+  vim.fn.system('cargo build')
   require('dap').continue()
 end)
 vim.keymap.set('n', '<S-F5>', function() 
@@ -37,7 +38,7 @@ vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
 
 -- Telescope keybindings
 vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files() end)
--- vim.keymap.set('n', '<C-[>', function() require('telescope.builtin').lsp_references() end)
+vim.keymap.set('n', '<C-[>', function() require('telescope.builtin').lsp_references() end)
 
 -- Zen Mode
 function toggle_zen_mode()
@@ -55,3 +56,8 @@ vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
   replace_keycodes = false
 })
 vim.g.copilot_no_tab_map = true
+
+
+-- Use F2 to rename symbol under cursor
+-- nmap <silent> <F2> <Plug>(coc-rename)
+vim.api.nvim_set_keymap('n', '<F2>', '<Plug>(coc-rename)', { noremap = true, silent = true })

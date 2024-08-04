@@ -56,7 +56,6 @@ return require('packer').startup(function()
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- Centerpad
   -- Lua
   use {
     "folke/zen-mode.nvim",
@@ -65,5 +64,11 @@ return require('packer').startup(function()
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     }
+  }
+
+  -- Coc
+  use {
+    'neoclide/coc.nvim',
+    branch = 'release',
   }
 end)

@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\john\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
+  ["coc.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\john\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\coc.nvim",
+    url = "https://github.com/neoclide/coc.nvim"
+  },
   ["copilot.vim"] = {
     loaded = true,
     path = "C:\\Users\\john\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\copilot.vim",

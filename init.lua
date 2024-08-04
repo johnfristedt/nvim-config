@@ -7,7 +7,7 @@ vim.g.mapleader = ","
 vim.g.localleader = "\\"
 
 -- IMPORTS
-require('debugger')     -- Debugging
+require('dbg')     -- Debugging
 require('keys')      -- Keymaps
 require('opts')      -- Options
 require('plug')      -- Plugins

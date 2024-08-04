@@ -1,5 +1,4 @@
 local dap = require("dap")
-require('dap.ext.vscode').load_launchjs(nil, {})
 
 -- Configure the adapter for Rust
 dap.adapters.lldb = {
@@ -8,6 +7,7 @@ dap.adapters.lldb = {
   name = 'lldb'
 }
 
+require('dap.ext.vscode').load_launchjs(nil, {})
 -- Configure the launch configurations
 -- dap.configurations.rust = {
 --   {
