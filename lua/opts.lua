@@ -1,6 +1,14 @@
 --[[ opts.lua ]]
 local opt = vim.opt
 
+vim.g.mapleader = "\\"
+vim.g.localleader = "\\"
+
+vim.wo.number = true
+vim.wo.relativenumber = true
+
+opt.clipboard = "unnamedplus"
+
 -- [[ Context ]]
 opt.colorcolumn = '0'            -- str:  Show col for max line length
 opt.number = true                -- bool: Show line numbers

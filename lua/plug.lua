@@ -13,5 +13,15 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip' -- Snippet engine
     use 'onsails/lspkind-nvim' -- Icons for completion
     use 'windwp/nvim-ts-autotag' -- Auto-close and rename HTML tags
+    use {
+      "folke/zen-mode.nvim",
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    }   
     use 'nvim-treesitter/nvim-treesitter' -- Better syntax highlighting
+    use 'nvim-telescope/telescope.nvim'
+    use 'nvim-lua/plenary.nvim' -- Dependency for Telescope
 end)
