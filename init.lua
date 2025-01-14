@@ -1,4 +1,4 @@
-vim.cmd("colorscheme codedark")
+vim.cmd("colorscheme vscode")
 --vim.cmd("language en_US")
 
 -- IMPORTS
@@ -14,6 +14,11 @@ require("CopilotChat").setup {
     -- See Configuration section for options
 }
 require('nvim_comment').setup()
+require('telescope').setup{
+  defaults = {
+    file_ignore_patterns = {"node_modules"}
+  }
+}
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "markdown", "markdown_inline", "typescript", "javascript" },

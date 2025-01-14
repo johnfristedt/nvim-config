@@ -25,23 +25,12 @@ vim.api.nvim_set_keymap('n', '<leader>v', ':vsplit<CR>', { noremap = true, silen
 vim.api.nvim_set_keymap('n', '<leader>q', ':q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require("telescope.builtin").lsp_actions()<CR>', { noremap = true, silent = true })
 
--- DAP keybindings
-vim.keymap.set('n', '<F5>', function() 
-  vim.cmd('tabnew %')
-  vim.fn.system('cargo build')
-  require('dap').continue()
-end)
-vim.keymap.set('n', '<S-F5>', function() 
-  vim.cmd('tabclose')
-  require('dap').terminate() 
-end)
-vim.keymap.set('n', '<S-b>', function()
-  vim.cmd('Cbuild') 
-end)
-vim.keymap.set('n', '<F9>', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+-- Nvim comment keybindings
+vim.api.nvim_set_keymap('n', '<leader>cc', ':CommentToggle<CR>', { noremap = true, silent = true })
+
+-- Diffview keybindings
+vim.api.nvim_set_keymap('n', '<leader>do', ':DiffviewOpen<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dc', ':DiffviewClose<CR>', { noremap = true, silent = true })
 
 -- Zen Mode
 function toggle_zen_mode()
