@@ -1,8 +1,16 @@
 --[[ opts.lua ]]
 local opt = vim.opt
 
-vim.g.mapleader = "\\"
-vim.g.localleader = "\\"
+-- Set space as the leader key
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Unmap the default behavior of space in normal and visual modes
+vim.api.nvim_set_keymap('n', '<Space>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<Space>', '<Nop>', { noremap = true, silent = true })
+
+-- Example leader key mapping
+vim.api.nvim_set_keymap('n', '<leader>e', ':Ex<CR>', { noremap = true, silent = true })
 
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -32,9 +40,9 @@ opt.hlsearch = false             -- bool: Highlight search matches
 
 -- [[ Whitespace ]]
 opt.expandtab = true             -- bool: Use spaces instead of tabs
-opt.shiftwidth = 4               -- num:  Size of an indent
-opt.softtabstop = 4              -- num:  Number of spaces tabs count for in insert mode
-opt.tabstop = 4                  -- num:  Number of spaces tabs count for
+opt.shiftwidth = 2               -- num:  Size of an indent
+opt.softtabstop = 2              -- num:  Number of spaces tabs count for in insert mode
+opt.tabstop = 2                  -- num:  Number of spaces tabs count for
 
 -- [[ Splits ]]
 opt.splitright = true            -- bool: Place new window to right of current one

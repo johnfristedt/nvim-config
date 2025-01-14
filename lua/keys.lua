@@ -16,8 +16,14 @@ vim.api.nvim_set_keymap("n", "<leader>8", "8<C-w>w", { noremap = true, silent = 
 vim.api.nvim_set_keymap("n", "<leader>9", "9<C-w>w", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>w", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>c", ":CHADopen --nofocus<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>e', ':Ex<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>v', ':vsplit<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>q', ':q<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require("telescope.builtin").lsp_actions()<CR>', { noremap = true, silent = true })
 
 -- DAP keybindings
 vim.keymap.set('n', '<F5>', function() 
@@ -71,9 +77,15 @@ vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
 })
 vim.g.copilot_no_tab_map = true
 
-
--- Use F2 to rename symbol under cursor
--- nmap <silent> <F2> <Plug>(coc-rename)
-vim.api.nvim_set_keymap('n', '<F2>', '<Plug>(coc-rename)', { noremap = true, silent = true })
-
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
+
+-- Copilot
+
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+
+vim.api.nvim_set_keymap("n", "<C-A-I>", ":CopilotChatOpen<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-A-B>", ":CopilotChatClose<CR>", { noremap = true, silent = true })
