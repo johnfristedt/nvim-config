@@ -49,7 +49,8 @@ opt.splitright = true            -- bool: Place new window to right of current o
 opt.splitbelow = true            -- bool: Place new window below the current one
 
 -- [[ Folding ]]
-opt.foldmethod = 'manual'
+opt.foldmethod = 'indent'        -- str:  Folding method to use
+opt.foldlevel = 99               -- num:  Fold level to start at
 
 -- Set completeopt to have a better completion experience
 -- :help completeopt
