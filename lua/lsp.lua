@@ -2,7 +2,10 @@ local lspconfig = require('lspconfig')
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls' },   -- Automatically install the Lua LSP
+  ensure_installed = {
+    'lua_ls',
+    'pyright',
+  }
 })
 
 -- Enable LSP servers
@@ -17,6 +20,7 @@ lspconfig.ts_ls.setup({
     buf_set_keymap(bufnr, 'n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap(bufnr, 'n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', '<leader>oi', '<Cmd>lua vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.api.nvim_buf_get_name(0) } })<CR>', opts)
   end,
   capabilities = require('cmp_nvim_lsp').default_capabilities(),
 })
@@ -64,6 +68,55 @@ lspconfig.efm.setup({
 -- Optional: Enable Emmet for faster HTML/CSS writing
 lspconfig.emmet_ls.setup {}
 
+-- Python LSP setup
+lspconfig.pyright.setup({
+  on_attach = function(client, bufnr)
+    -- Keybindings for LSP
+    local opts = { noremap = true, silent = true }
+    local buf_set_keymap = vim.api.nvim_buf_set_keymap
+    buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  end,
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
+
+-- Kotlin LSP setup
+lspconfig.kotlin_language_server.setup({
+  on_attach = function(client, bufnr)
+    -- Keybindings for LSP
+    local opts = { noremap = true, silent = true }
+    local buf_set_keymap = vim.api.nvim_buf_set_keymap
+    buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', '<leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap(bufnr, 'n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  end,
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
+
+lspconfig.efm.setup({
+  init_options = { documentFormatting = true },
+  settings = {
+    rootMarkers = { ".git/" },
+    languages = {
+      javascript = {
+        { formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true },
+      },
+      python = {
+        { formatCommand = "black --quiet -", formatStdin = true },
+      },
+      kotlin = {
+        { formatCommand = "ktlint -F --stdin", formatStdin = true },
+      },
+    },
+  },
+  filetypes = { "javascript", "python", "kotlin" },
+})
+
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
@@ -76,26 +129,26 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item()                      -- Cycle to the next item
+        cmp.select_next_item()              -- Cycle to the next item
       elseif require('luasnip').expand_or_jumpable() then
-        require('luasnip').expand_or_jump()         -- Jump to the next snippet placeholder
+        require('luasnip').expand_or_jump() -- Jump to the next snippet placeholder
       else
-        fallback()                                  -- Fallback to regular tab behavior
+        fallback()                          -- Fallback to regular tab behavior
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_prev_item()              -- Cycle to the previous item
+        cmp.select_prev_item()      -- Cycle to the previous item
       elseif require('luasnip').jumpable(-1) then
-        require('luasnip').jump(-1)         -- Jump to the previous snippet placeholder
+        require('luasnip').jump(-1) -- Jump to the previous snippet placeholder
       else
-        fallback()                          -- Fallback to regular shift-tab behavior
+        fallback()                  -- Fallback to regular shift-tab behavior
       end
     end, { 'i', 's' }),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),     -- Confirm the selection
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Confirm the selection
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },

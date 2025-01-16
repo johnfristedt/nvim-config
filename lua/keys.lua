@@ -27,6 +27,7 @@ vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require("telescope.builtin"
 
 -- Nvim comment keybindings
 vim.api.nvim_set_keymap('n', '<leader>cc', ':CommentToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-_>', ":'<,'>CommentToggle<CR>", { noremap = true, silent = true })
 
 -- Diffview keybindings
 vim.api.nvim_set_keymap('n', '<leader>do', ':DiffviewOpen<CR>', { noremap = true, silent = true })
@@ -66,7 +67,8 @@ vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
 })
 vim.g.copilot_no_tab_map = true
 
-vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files search_dirs={"."}<CR>', { noremap = true, silent = true })
 
 -- Copilot
 
