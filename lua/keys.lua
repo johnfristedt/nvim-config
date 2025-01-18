@@ -17,6 +17,7 @@ vim.api.nvim_set_keymap("n", "<leader>9", "9<C-w>w", { noremap = true, silent = 
 vim.api.nvim_set_keymap("n", "<leader>w", "<C-w>w", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>N', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>c", ":CHADopen --nofocus<CR>", { noremap = true, silent = true })
 
